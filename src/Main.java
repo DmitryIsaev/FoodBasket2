@@ -1,9 +1,8 @@
 import java.io.File;
 import java.util.Scanner;
-import java.io.IOException;
 
 class Main {
-    static File saveFile = new File("basket.txt");
+    static File saveFile = new File("basket.bin");
 
     public static void main(String[] args) {
         String[] products = {"Хлеб", "Яблоки", "Молоко"};
@@ -12,7 +11,7 @@ class Main {
         Basket basket = null;
 
         if (saveFile.exists()) {
-            basket = Basket.loadFromTxtFile(saveFile);
+            basket = Basket.loadFromBinFile(saveFile);
         } else {
             basket = new Basket(products, prices);
         }
@@ -53,8 +52,8 @@ class Main {
                 productNumber = Integer.parseInt(parts[0]) - 1;
                 productCount = Integer.parseInt(parts[1]);
                 basket.addToCart(productNumber, productCount);
-                basket.saveTxt(saveFile);
-            } catch (NumberFormatException | IOException error) {
+                basket.saveBin(saveFile);
+            } catch (NumberFormatException error) {
                 System.out.println("Ошибка 4: введены буквы вместо чисел");
             }
         }
